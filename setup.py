@@ -1,8 +1,5 @@
 import os
 from dotenv import load_dotenv
-START_URL = "https://www.supremenewyork.com/mobile#categories/new"
-TIMEOUT_THRESHOLD = 1
-TYPING_DELAY = 0.005
 
 load_dotenv()
 ITEM_NAME = os.getenv("ITEM_NAME")
