@@ -15,4 +15,3 @@ if __name__ == "__main__":
     bot.fill_in_checkout_form()
     bot.quit()
     print(time.time() - start_time)
-    

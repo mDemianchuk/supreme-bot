@@ -33,11 +33,13 @@ class Bot:
         colorway_box_x_path = '//*[@id="style-selector"]/li[{}]'.format(
             self.settings["itemColorwayPosition"]
         )
-        colorway_box = self.webdriver.find_element_by_x_path(colorway_box_x_path)
+        colorway_box = self.webdriver.find_element_by_x_path(
+            colorway_box_x_path)
         colorway_box.click()
 
     def select_size(self):
-        self.webdriver.select_dropdown_option('//*[@id="size-options"]', self.settings["itemSize"])
+        self.webdriver.select_dropdown_option(
+            '//*[@id="size-options"]', self.settings["itemSize"])
 
     def add_to_cart(self):
         self.webdriver.find_element_by_visible_text("add to cart").click()
@@ -69,11 +71,15 @@ class Bot:
         self.webdriver.find_element_by_x_path(
             '//*[@id="address_inputs_table"]/tbody/tr/td[3]/div/div[1]'
         ).click()
-        self.webdriver.select_dropdown_option('//*[@id="order_billing_state"]', self.settings["state"])
+        self.webdriver.select_dropdown_option(
+            '//*[@id="order_billing_state"]', self.settings["state"])
         self.webdriver.fill_in_input_field(
             '//input[@placeholder="credit card number"]', self.settings["ccNumber"]
         )
-        self.webdriver.select_dropdown_option('//*[@id="credit_card_month"]', self.settings["expM"])
-        self.webdriver.select_dropdown_option('//*[@id="credit_card_year"]', self.settings["expY"])
-        self.webdriver.fill_in_input_field('//input[@placeholder="cvv"]', self.settings["cvv"])
+        self.webdriver.select_dropdown_option(
+            '//*[@id="credit_card_month"]', self.settings["expM"])
+        self.webdriver.select_dropdown_option(
+            '//*[@id="credit_card_year"]', self.settings["expY"])
+        self.webdriver.fill_in_input_field(
+            '//input[@placeholder="cvv"]', self.settings["cvv"])
         self.webdriver.find_element_by_x_path('//*[@id="order_terms"]').click()
