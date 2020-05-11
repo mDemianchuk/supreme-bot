@@ -22,12 +22,10 @@ class Bot:
 
     def select_item(self):
         item_name = self.settings["itemName"]
-        while not self.is_item_selected:
-            if self.is_item_present(item_name):
-                self.select_item(item_name)
-            else:
+        while not self.is_item_selected():
+            item = self.webdriver.find_element_by_visible_text(item_name)
+            if not self.webdriver.click_on_element(item):
                 self.webdriver.refresh()
-        self.webdriver.find_element_by_visible_text(item_name).click()
 
     def select_colorway(self):
         colorway_box_x_path = '//*[@id="style-selector"]/li[{}]'.format(
@@ -35,17 +33,21 @@ class Bot:
         )
         colorway_box = self.webdriver.find_element_by_x_path(
             colorway_box_x_path)
-        colorway_box.click()
+        return self.webdriver.click_on_element(colorway_box)
 
     def select_size(self):
-        self.webdriver.select_dropdown_option(
+        return self.webdriver.select_dropdown_option(
             '//*[@id="size-options"]', self.settings["itemSize"])
 
     def add_to_cart(self):
-        self.webdriver.find_element_by_visible_text("add to cart").click()
+        add_to_cart_button = self.webdriver.find_element_by_visible_text(
+            "add to cart")
+        return self.webdriver.click_on_element(add_to_cart_button)
 
     def go_to_checkout(self):
-        self.webdriver.find_element_by_visible_text("CHECK OUT").click()
+        checkout_button = self.webdriver.find_element_by_visible_text(
+            "check out")
+        return self.webdriver.click_on_element(checkout_button)
 
     def fill_in_checkout_form(self):
         self.webdriver.fill_in_input_field(
@@ -67,10 +69,6 @@ class Bot:
         self.webdriver.fill_in_input_field(
             '//*[@id="address_inputs_table"]/tbody/tr/td[1]/input', self.settings["zip"]
         )
-        # The class of this div is "needsclick", so we click on it just in case
-        self.webdriver.find_element_by_x_path(
-            '//*[@id="address_inputs_table"]/tbody/tr/td[3]/div/div[1]'
-        ).click()
         self.webdriver.select_dropdown_option(
             '//*[@id="order_billing_state"]', self.settings["state"])
         self.webdriver.fill_in_input_field(
@@ -82,4 +80,8 @@ class Bot:
             '//*[@id="credit_card_year"]', self.settings["expY"])
         self.webdriver.fill_in_input_field(
             '//input[@placeholder="cvv"]', self.settings["cvv"])
-        self.webdriver.find_element_by_x_path('//*[@id="order_terms"]').click()
+
+    def agree_with_terms(self):
+        terms_checkbox = self.webdriver.find_element_by_x_path(
+            '//*[@id="order_terms"]')
+        return self.webdriver.click_on_element(terms_checkbox)

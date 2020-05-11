@@ -40,22 +40,32 @@ class WebDriver:
     def find_element_by_x_path(self, element_x_path):
         return self.find_element_by_locator((By.XPATH, element_x_path))
 
-    def find_element_by_visible_text(self, text):
+    def find_element_by_visible_text(self, element_text):
         case_insensitive_element_x_path = "//*[text()[contains(translate(., '{}', '{}'), '{}')]]"\
-            .format(text.upper(), text.lower(), text.lower())
+            .format(element_text.upper(), element_text.lower(), element_text.lower())
         return self.find_element_by_x_path(case_insensitive_element_x_path)
+
+    def click_on_element(self, element):
+        try:
+            element.click()
+            return True
+        except:
+            return False
 
     def select_dropdown_option(self, dropdown_x_path, option_text):
         option_x_path = "{}/option[text()='{}']".format(
             dropdown_x_path, option_text)
         option = self.find_element_by_x_path(option_x_path)
-        option.click()
+        return self.click_on_element(option)
 
     def fill_in_input_field(self, input_field_x_path, text):
         input_field = self.find_element_by_x_path(input_field_x_path)
-        input_field.click()
-        for character in text:
-            input_field.send_keys(character)
+        if self.click_on_element(input_field):
+            for character in text:
+                input_field.send_keys(character)
+            return True
+        else:
+            return False
 
     def quit(self):
         self.driver.quit()

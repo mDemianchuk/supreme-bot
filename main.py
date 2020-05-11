@@ -13,5 +13,5 @@ if __name__ == "__main__":
     bot.add_to_cart()
     bot.go_to_checkout()
     bot.fill_in_checkout_form()
-    bot.quit()
+    bot.agree_with_terms()
     print(time.time() - start_time)
