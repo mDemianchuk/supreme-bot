@@ -15,7 +15,8 @@ class WebDriver:
 
     def get_options(self):
         options = webdriver.ChromeOptions()
-        options.add_experimental_option("mobileEmulation", {"deviceName": "iPad"})
+        options.add_experimental_option(
+            "mobileEmulation", {"deviceName": "iPad"})
         options.add_argument("--window-size=768,1024")
         return options
 
@@ -40,10 +41,13 @@ class WebDriver:
         return self.find_element_by_locator((By.XPATH, element_x_path))
 
     def find_element_by_visible_text(self, text):
-        return self.find_element_by_x_path("//*[contains(text(), '{}')]".format(text))
+        case_insensitive_element_x_path = "//*[text()[contains(translate(., '{}', '{}'), '{}')]]"\
+            .format(text.upper(), text.lower(), text.lower())
+        return self.find_element_by_x_path(case_insensitive_element_x_path)
 
     def select_dropdown_option(self, dropdown_x_path, option_text):
-        option_x_path = "{}/option[text()='{}']".format(dropdown_x_path, option_text)
+        option_x_path = "{}/option[text()='{}']".format(
+            dropdown_x_path, option_text)
         option = self.find_element_by_x_path(option_x_path)
         option.click()
 
