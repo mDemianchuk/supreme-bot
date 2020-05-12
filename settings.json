@@ -1,16 +1,20 @@
 {
-    "itemName": "",
-    "itemColorwayPosition": "",
-    "itemSize": "",
-    "fullName": "",
-    "email": "",
-    "phone": "",
-    "address": "",
-    "unit": "",
-    "zip": "",
-    "state": "",
-    "ccNumber": "",
-    "expM": "",
-    "expY": "",
-    "cvv": ""
+    "itemInfo": {
+        "name": "",
+        "colorwayPosition": "",
+        "size": ""
+    },
+    "billingInfo": {
+        "fullName": "",
+        "email": "",
+        "phone": "",
+        "address": "",
+        "unit": "",
+        "zip": "",
+        "state": "",
+        "ccNumber": "",
+        "expM": "",
+        "expY": "",
+        "cvv": ""
+    }
 }
