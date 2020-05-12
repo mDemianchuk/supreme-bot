@@ -1,9 +1,11 @@
 {
-    "itemInfo": {
-        "name": "",
-        "colorwayPosition": "",
-        "size": ""
-    },
+    "items": [
+        {
+            "name": "",
+            "colorwayPosition": "",
+            "size": ""
+        }
+    ],
     "billingInfo": {
         "fullName": "",
         "email": "",

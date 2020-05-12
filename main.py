@@ -1,18 +1,14 @@
-import time
 import util
 from bot import Bot
+from threading import Thread
 
 
-if __name__ == "__main__":
-    settings = util.get_settings()
-    item_name = settings["itemInfo"]["name"].strip()
-    item_colorway_position = settings["itemInfo"]["colorwayPosition"].strip()
-    item_size = settings["itemInfo"]["size"].strip()
-    billing_info = settings["billingInfo"]
-
+def buy_item(item, billing_info):
+    item_name = item["name"].strip()
+    item_colorway_position = item["colorwayPosition"].strip()
+    item_size = item["size"].strip()
     bot = Bot()
     bot.start()
-    start_time = time.time()
     bot.select_item(item_name)
     if item_colorway_position:
         bot.select_colorway(item_colorway_position)
@@ -22,4 +18,17 @@ if __name__ == "__main__":
     bot.go_to_checkout()
     bot.fill_in_checkout_form(billing_info)
     bot.agree_with_terms()
-    print(time.time() - start_time)
+
+
+def main():
+    settings = util.get_settings()
+    for item in settings["items"]:
+        try:
+            Thread(target=buy_item, args=(
+                item, settings["billingInfo"])).start()
+        except:
+            print("Unable to start a task for the {}".format(item["name"]))
+
+
+if __name__ == "__main__":
+    main()
