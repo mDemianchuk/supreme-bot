@@ -17,6 +17,7 @@ class WebDriver:
         options = webdriver.ChromeOptions()
         options.add_experimental_option(
             "mobileEmulation", {"deviceName": "iPad"})
+        options.add_experimental_option("detach", True)
         options.add_argument("--window-size=768,1024")
         return options
 

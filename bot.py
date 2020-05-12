@@ -7,7 +7,7 @@ class Bot:
     def __init__(self):
         self.webdriver = WebDriver()
 
-    def start(self):
+    def go_to_start_page(self):
         self.webdriver.open_url(START_URL)
 
     def quit(self):
