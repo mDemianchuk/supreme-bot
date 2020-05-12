@@ -1,20 +1,19 @@
 from webdriver import WebDriver
 
-START_URL = "https://www.supremenewyork.com/mobile#categories/new"
-
 
 class Bot:
-    def __init__(self):
+    def __init__(self, start_page_url):
         self.webdriver = WebDriver()
+        self.start_page_url = start_page_url
 
     def go_to_start_page(self):
-        self.webdriver.open_url(START_URL)
+        self.webdriver.open_url(self.start_page_url)
 
     def quit(self):
         self.webdriver.quit()
 
     def is_item_selected(self):
-        return self.webdriver.get_current_url() != START_URL
+        return self.webdriver.get_current_url() != self.start_page_url
 
     def select_item(self, item_name):
         while not self.is_item_selected():

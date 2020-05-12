@@ -4,7 +4,7 @@
 
 ### macOS ###
 # General
-settings.json
+*.json
 .DS_Store
 .AppleDouble
 .LSOverride

@@ -8,7 +8,7 @@ def main():
     items = settings["items"]
     billing_info = settings["billingInfo"]
 
-    bot = Bot()
+    bot = Bot("https://www.supremenewyork.com/mobile#categories/new")
     item_index = 0
     while item_index != len(items):
         item_name = items[item_index]["name"].strip()
