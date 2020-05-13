@@ -1,4 +1,4 @@
-import time
+import logging
 import chromedriver_binary
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -30,16 +30,14 @@ class WebDriver:
     def refresh(self):
         self.driver.refresh()
 
-    def find_element_by_locator(self, locator):
+    def find_element_by_x_path(self, element_x_path):
         try:
             return WebDriverWait(self.driver, TIMEOUT_THRESHOLD).until(
-                EC.visibility_of_element_located(locator)
+                EC.visibility_of_element_located((By.XPATH, element_x_path))
             )
         except TimeoutException:
-            print("Item isn't found yet")
-
-    def find_element_by_x_path(self, element_x_path):
-        return self.find_element_by_locator((By.XPATH, element_x_path))
+            logging.warning(
+                "Element isn't located yet: {}".format(element_x_path))
 
     def find_element_by_visible_text(self, element_text):
         case_insensitive_element_x_path = "//*[text()[contains(translate(., '{}', '{}'), '{}')]]"\
@@ -51,6 +49,7 @@ class WebDriver:
             element.click()
             return True
         except:
+            logging.warning("Unable to click on the element")
             return False
 
     def select_dropdown_option(self, dropdown_x_path, option_text):
@@ -61,11 +60,13 @@ class WebDriver:
 
     def fill_in_input_field(self, input_field_x_path, text):
         input_field = self.find_element_by_x_path(input_field_x_path)
-        if self.click_on_element(input_field):
+        try:
             for character in text:
                 input_field.send_keys(character)
             return True
-        else:
+        except:
+            logging.warning(
+                "Unable to fill in the input field: {}".format(input_field_x_path))
             return False
 
     def quit(self):
