@@ -9,17 +9,18 @@ class Bot:
     def go_to_start_page(self):
         self.webdriver.open_url(self.start_page_url)
 
+    def refresh(self):
+        self.webdriver.refresh()
+
     def quit(self):
         self.webdriver.quit()
 
-    def is_item_selected(self):
-        return self.webdriver.get_current_url() != self.start_page_url
+    def is_on_start_page(self):
+        return self.webdriver.get_current_url() == self.start_page_url
 
     def select_item(self, item_name):
-        while not self.is_item_selected():
-            item = self.webdriver.find_element_by_visible_text(item_name)
-            if not self.webdriver.click_on_element(item):
-                self.webdriver.refresh()
+        item = self.webdriver.find_element_by_visible_text(item_name)
+        return self.webdriver.click_on_element(item)
 
     def select_colorway(self, item_colorway_position):
         colorway_box_x_path = '//*[@id="style-selector"]/li[{}]'.format(
@@ -73,7 +74,7 @@ class Bot:
         self.webdriver.fill_in_input_field(
             '//input[@placeholder="cvv"]', billing_info["cvv"])
 
-    def agree_with_terms(self):
+    def agree_to_terms(self):
         terms_checkbox = self.webdriver.find_element_by_x_path(
             '//*[@id="order_terms"]')
         return self.webdriver.click_on_element(terms_checkbox)

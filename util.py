@@ -1,4 +1,5 @@
 import json
+import logging
 
 
 def get_settings():
@@ -6,4 +7,4 @@ def get_settings():
         with open("settings.json") as settings_file:
             return json.load(settings_file)
     except:
-        print("Error while loading the settings file")
+        logging.error("Error while loading the settings file")
