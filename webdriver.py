@@ -1,5 +1,5 @@
+import os
 import logging
-import chromedriver_binary
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
@@ -11,7 +11,16 @@ TIMEOUT_THRESHOLD = 1
 
 class WebDriver:
     def __init__(self):
-        self.driver = webdriver.Chrome(options=self.get_options())
+        self.driver = webdriver.Chrome(
+            executable_path=self.get_chromedriver_path(), options=self.get_options())
+
+    def get_chromedriver_path(self):
+        current_dir_path = os.path.dirname(__file__)
+        chromedriver_path = os.path.join(current_dir_path, "chromedriver")
+        # for Windows users
+        if os.name == "nt":
+            chromedriver_path += ".exe"
+        return chromedriver_path
 
     def get_options(self):
         options = webdriver.ChromeOptions()
