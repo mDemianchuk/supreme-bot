@@ -31,6 +31,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### ChromeDriver ###
+chromedriver*
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
