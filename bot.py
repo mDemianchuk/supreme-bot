@@ -78,3 +78,8 @@ class Bot:
         terms_checkbox = self.webdriver.find_element_by_x_path(
             '//*[@id="order_terms"]')
         return self.webdriver.click_on_element(terms_checkbox)
+
+    def process_payment(self):
+        process_payment_button = self.webdriver.find_element_by_visible_text(
+            "process payment")
+        return self.webdriver.click_on_element(process_payment_button)

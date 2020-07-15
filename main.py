@@ -43,8 +43,12 @@ def main():
     bot.fill_in_checkout_form(billing_info)
 
     if bot.agree_to_terms():
-        logging.info(
-            "Agreed to temrs. You can click the 'Process Payment' now!")
+        logging.info("Agreed to temrs")
+
+
+# Uncomment this block of code to process the payment automatically
+#    if bot.process_payment():
+#        logging.info("Payment is processing")
 
 
 if __name__ == "__main__":
