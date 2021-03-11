@@ -23,7 +23,7 @@ class Bot:
         return self.webdriver.click_on_element(item)
 
     def select_colorway(self, item_colorway_position):
-        colorway_box_x_path = '//*[@id="style-selector"]/li[{}]'.format(
+        colorway_box_x_path = '//*[@id="styles"]/ul/li[{}]'.format(
             item_colorway_position)
         colorway_box = self.webdriver.find_element_by_x_path(
             colorway_box_x_path)
