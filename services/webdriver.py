@@ -13,10 +13,10 @@ ELEMENT_WAIT_TIME = 1
 class WebDriver:
     def __init__(self):
         self.driver = webdriver.Chrome(
-            executable_path=self.get_chromedriver_path(), options=self.get_options())
+            executable_path=self.__get_chromedriver_path(), options=self.__get_options())
 
     @staticmethod
-    def get_chromedriver_path():
+    def __get_chromedriver_path():
         current_dir_path = os.path.dirname(__file__)
         chromedriver_path = os.path.join(current_dir_path, "../chromedriver")
         # for Windows users
@@ -25,7 +25,7 @@ class WebDriver:
         return chromedriver_path
 
     @staticmethod
-    def get_options():
+    def __get_options():
         options = webdriver.ChromeOptions()
         options.add_experimental_option(
             "mobileEmulation", {"deviceName": "iPad"})
@@ -56,13 +56,12 @@ class WebDriver:
         return self.find_element_by_x_path(case_insensitive_element_x_path)
 
     @staticmethod
-    def click_on_element(element: WebElement):
-        try:
-            element.click()
-            return True
-        except:
-            log_warning("Unable to click on the element.")
+    def click_on_element(element: WebElement or None):
+        if element is None:
+            log_warning("Unable to click - element is empty.")
             return False
+        element.click()
+        return True
 
     def select_dropdown_option(self, dropdown_x_path: str, option_text: str):
         option_x_path = "{}/option[text()='{}']".format(
@@ -72,13 +71,9 @@ class WebDriver:
 
     def fill_in_input_field(self, input_field_x_path: str, text: str):
         input_field = self.find_element_by_x_path(input_field_x_path)
-        try:
-            for character in text:
-                input_field.send_keys(character)
-            return True
-        except:
-            log_warning(f"Unable to fill in the input field: {input_field_x_path}")
-            return False
+        for character in text:
+            input_field.send_keys(character)
+        return True
 
     def quit(self):
         self.driver.quit()
