@@ -1,10 +1,13 @@
 from webdriver import WebDriver
+from utils.logging_util import log_message
+from models.billing_info import BillingInfo
 
 
 class Bot:
     def __init__(self, start_page_url: str):
         self.webdriver = WebDriver()
         self.start_page_url = start_page_url
+        log_message("Initialized a bot instance.")
 
     def go_to_start_page(self):
         self.webdriver.open_url(self.start_page_url)
@@ -42,37 +45,37 @@ class Bot:
             "check out")
         return self.webdriver.click_on_element(checkout_button)
 
-    def fill_in_checkout_form(self, billing_info: dict):
+    def fill_in_checkout_form(self, billing_info: BillingInfo):
         self.webdriver.fill_in_input_field(
-            '//*[@id="billing-info"]/tbody/tr[1]/td/input', billing_info["fullName"]
+            '//*[@id="billing-info"]/tbody/tr[1]/td/input', billing_info.full_name
         )
         self.webdriver.fill_in_input_field(
-            '//*[@id="billing-info"]/tbody/tr[2]/td/input', billing_info["email"]
+            '//*[@id="billing-info"]/tbody/tr[2]/td/input', billing_info.email
         )
         self.webdriver.fill_in_input_field(
-            '//*[@id="billing-info"]/tbody/tr[3]/td/input', billing_info["phone"]
+            '//*[@id="billing-info"]/tbody/tr[3]/td/input', billing_info.phone
         )
         self.webdriver.fill_in_input_field(
-            '//*[@id="billing-info"]/tbody/tr[4]/td/input', billing_info["address"]
+            '//*[@id="billing-info"]/tbody/tr[4]/td/input', billing_info.address
         )
-        if billing_info["unit"]:
+        if billing_info.unit:
             self.webdriver.fill_in_input_field(
-                '//*[@id="billing-info"]/tbody/tr[5]/td/input', billing_info["unit"]
+                '//*[@id="billing-info"]/tbody/tr[5]/td/input', billing_info.unit
             )
         self.webdriver.fill_in_input_field(
-            '//*[@id="address_inputs_table"]/tbody/tr/td[1]/input', billing_info["zip"]
+            '//*[@id="address_inputs_table"]/tbody/tr/td[1]/input', billing_info.zip_code
         )
         self.webdriver.select_dropdown_option(
-            '//*[@id="order_billing_state"]', billing_info["state"])
+            '//*[@id="order_billing_state"]', billing_info.state)
         self.webdriver.fill_in_input_field(
-            '//input[@placeholder="credit card number"]', billing_info["ccNumber"]
+            '//input[@placeholder="credit card number"]', billing_info.cc_number
         )
         self.webdriver.select_dropdown_option(
-            '//*[@id="credit_card_month"]', billing_info["expM"])
+            '//*[@id="credit_card_month"]', billing_info.exp_month)
         self.webdriver.select_dropdown_option(
-            '//*[@id="credit_card_year"]', billing_info["expY"])
+            '//*[@id="credit_card_year"]', billing_info.exp_year)
         self.webdriver.fill_in_input_field(
-            '//input[@placeholder="cvv"]', billing_info["cvv"])
+            '//input[@placeholder="cvv"]', billing_info.cvv)
 
     def agree_to_terms(self):
         terms_checkbox = self.webdriver.find_element_by_x_path(

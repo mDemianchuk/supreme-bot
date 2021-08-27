@@ -1,13 +1,13 @@
 import os
-import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from utils.logging_util import log_warning
 
-TIMEOUT_THRESHOLD = 1
+ELEMENT_WAIT_TIME = 1
 
 
 class WebDriver:
@@ -44,24 +44,24 @@ class WebDriver:
 
     def find_element_by_x_path(self, element_x_path: str):
         try:
-            return WebDriverWait(self.driver, TIMEOUT_THRESHOLD).until(
+            return WebDriverWait(self.driver, ELEMENT_WAIT_TIME).until(
                 ec.visibility_of_element_located((By.XPATH, element_x_path))
             )
         except TimeoutException:
-            logging.warning(
-                "Element isn't located yet: {}".format(element_x_path))
+            log_warning(f"Element isn't located yet: {element_x_path}")
 
     def find_element_by_visible_text(self, element_text: str):
         case_insensitive_element_x_path = "//*[text()[contains(translate(., '{}', '{}'), '{}')]]" \
             .format(element_text.upper(), element_text.lower(), element_text.lower())
         return self.find_element_by_x_path(case_insensitive_element_x_path)
 
-    def click_on_element(self, element: WebElement):
+    @staticmethod
+    def click_on_element(element: WebElement):
         try:
             element.click()
             return True
         except:
-            logging.warning("Unable to click on the element")
+            log_warning("Unable to click on the element.")
             return False
 
     def select_dropdown_option(self, dropdown_x_path: str, option_text: str):
@@ -77,8 +77,7 @@ class WebDriver:
                 input_field.send_keys(character)
             return True
         except:
-            logging.warning(
-                "Unable to fill in the input field: {}".format(input_field_x_path))
+            log_warning(f"Unable to fill in the input field: {input_field_x_path}")
             return False
 
     def quit(self):
