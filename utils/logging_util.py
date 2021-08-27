@@ -13,7 +13,3 @@ def log_message(message: str):
 
 def log_warning(message: str):
     logging.warning(message)
-
-
-def log_error(message: str):
-    logging.error(message)
