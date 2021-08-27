@@ -18,7 +18,7 @@ class WebDriver:
     @staticmethod
     def get_chromedriver_path():
         current_dir_path = os.path.dirname(__file__)
-        chromedriver_path = os.path.join(current_dir_path, "chromedriver")
+        chromedriver_path = os.path.join(current_dir_path, "../chromedriver")
         # for Windows users
         if os.name == "nt":
             chromedriver_path += ".exe"

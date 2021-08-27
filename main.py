@@ -1,5 +1,5 @@
 import time
-from bot import Bot
+from services.bot import Bot
 from services.setting_loader import SettingLoader
 from utils.logging_util import log_message
 
