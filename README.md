@@ -57,6 +57,6 @@ A free to use bot for supremenewyork.com that allows multiple-item checkout
 
 5. Run the bot:
    ```
-   $ python3 main.py
+   $ python3 run.py
    ```
    \* To avoid accidental charges, "Process payment" needs to be clicked **manually**

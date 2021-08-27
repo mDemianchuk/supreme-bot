@@ -4,7 +4,7 @@ from services.setting_loader import SettingLoader
 from utils.logging_util import log_message
 
 
-def main():
+def run():
     items = SettingLoader.load_items()
     billing_info = SettingLoader.load_billing_info()
 
@@ -47,4 +47,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run()
