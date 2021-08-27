@@ -18,7 +18,7 @@ A free to use bot for supremenewyork.com that allows multiple-item checkout
     $ pip3 install -r requirements.txt   
     ```
 
-3. Download [ChromDriver](https://chromedriver.chromium.org/downloads) for your version of Google Chrome, extract the executable, and place it in the root directory:
+3. Download [ChromeDriver](https://chromedriver.chromium.org/downloads) for your version of Google Chrome, extract the executable, and place it in the root directory:
 
     ```
     supreme-bot/
