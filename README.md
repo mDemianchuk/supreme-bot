@@ -24,7 +24,7 @@ A free to use bot for supremenewyork.com that allows multiple-item checkout
     supreme-bot/
     ├── bot.py
     ├── ...
-    ├── chromedriver
+    ├── chromedriver (or chromedriver.exe for Windows users)
     ```
 
 4. Fill in the `settings.json`:
