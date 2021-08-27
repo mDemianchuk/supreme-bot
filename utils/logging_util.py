@@ -2,8 +2,7 @@ import logging
 
 # Configure logging
 logging.basicConfig(
-    format="%(levelname)s: %(asctime)s - %(message)s",
-    datefmt="%I:%M:%S", level=logging.INFO
+    format="%(levelname)s: %(asctime)s - %(message)s", datefmt="%I:%M:%S", level=logging.INFO
 )
 
 

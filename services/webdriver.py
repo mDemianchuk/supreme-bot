@@ -1,10 +1,12 @@
 import os
+
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.ui import WebDriverWait
+
 from utils.logging_util import log_warning
 
 ELEMENT_WAIT_TIME = 1
@@ -13,7 +15,8 @@ ELEMENT_WAIT_TIME = 1
 class WebDriver:
     def __init__(self):
         self.driver = webdriver.Chrome(
-            executable_path=self.__get_chromedriver_path(), options=self.__get_options())
+            executable_path=self.__get_chromedriver_path(), options=self.__get_options()
+        )
 
     @staticmethod
     def __get_chromedriver_path():
@@ -27,8 +30,7 @@ class WebDriver:
     @staticmethod
     def __get_options():
         options = webdriver.ChromeOptions()
-        options.add_experimental_option(
-            "mobileEmulation", {"deviceName": "iPad"})
+        options.add_experimental_option("mobileEmulation", {"deviceName": "iPad"})
         options.add_experimental_option("detach", True)
         options.add_argument("--window-size=768,1024")
         return options
@@ -51,8 +53,11 @@ class WebDriver:
             log_warning(f"Element isn't located yet: {element_x_path}")
 
     def find_element_by_visible_text(self, element_text: str):
-        case_insensitive_element_x_path = "//*[text()[contains(translate(., '{}', '{}'), '{}')]]" \
-            .format(element_text.upper(), element_text.lower(), element_text.lower())
+        case_insensitive_element_x_path = (
+            "//*[text()[contains(translate(., '{}', '{}'), '{}')]]".format(
+                element_text.upper(), element_text.lower(), element_text.lower()
+            )
+        )
         return self.find_element_by_x_path(case_insensitive_element_x_path)
 
     @staticmethod
@@ -64,8 +69,7 @@ class WebDriver:
         return True
 
     def select_dropdown_option(self, dropdown_x_path: str, option_text: str):
-        option_x_path = "{}/option[text()='{}']".format(
-            dropdown_x_path, option_text)
+        option_x_path = "{}/option[text()='{}']".format(dropdown_x_path, option_text)
         option = self.find_element_by_x_path(option_x_path)
         return self.click_on_element(option)
 

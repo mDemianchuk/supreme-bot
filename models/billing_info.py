@@ -1,17 +1,17 @@
 class BillingInfo:
     def __init__(
-            self,
-            full_name: str,
-            email: str,
-            phone: str,
-            address: str,
-            unit: str,
-            zip_code: str,
-            state: str,
-            cc_number: str,
-            exp_month: str,
-            exp_year: str,
-            cvv: str
+        self,
+        full_name: str,
+        email: str,
+        phone: str,
+        address: str,
+        unit: str,
+        zip_code: str,
+        state: str,
+        cc_number: str,
+        exp_month: str,
+        exp_year: str,
+        cvv: str,
     ):
         self.full_name = full_name.strip()
         self.email = email.strip()

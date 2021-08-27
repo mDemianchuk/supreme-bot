@@ -15,7 +15,7 @@ A free to use bot for supremenewyork.com that allows multiple-item checkout
 2. Install dependencies:
     ```
     $ cd supreme-bot
-    $ pip3 install -r requirements.txt   
+    $ pip3 install -r requirements.txt
     ```
 
 3. Download [ChromeDriver](https://chromedriver.chromium.org/downloads) for your version of Google Chrome, extract the executable, and place it in the root directory:
@@ -29,9 +29,9 @@ A free to use bot for supremenewyork.com that allows multiple-item checkout
 
 4. Fill in `settings.json`:
 
-    ```  
+    ```
     {
-      "items": [                         
+      "items": [
           {
               "name": "",                - full or partial item name (case-insensitive)
               "color": "",               - use 1-based index or leave blank for any color
@@ -41,7 +41,7 @@ A free to use bot for supremenewyork.com that allows multiple-item checkout
       "billingInfo": {
           "fullName": "",
           "email": "",
-          "phone": "",                   - numerical characters only (no spaces) 
+          "phone": "",                   - numerical characters only (no spaces)
           "address": "",                 - street address only (city will be autocompleted by zip)
           "unit": "",                    - leave blank if not applicable
           "zip": "",                     - 6-digit zip code

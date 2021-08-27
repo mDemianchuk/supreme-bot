@@ -1,6 +1,6 @@
-from utils.json_util import read_json_file
-from models.item import Item
 from models.billing_info import BillingInfo
+from models.item import Item
+from utils.json_util import read_json_file
 
 
 class SettingLoader:
@@ -10,11 +10,7 @@ class SettingLoader:
     def load_items(cls):
         items = []
         for item_json in cls.__settings_json["items"]:
-            item = Item(
-                item_json["name"],
-                item_json["color"],
-                item_json["size"]
-            )
+            item = Item(item_json["name"], item_json["color"], item_json["size"])
             items.append(item)
         return items
 
@@ -31,5 +27,5 @@ class SettingLoader:
             cls.__settings_json["billingInfo"]["ccNumber"],
             cls.__settings_json["billingInfo"]["expM"],
             cls.__settings_json["billingInfo"]["expY"],
-            cls.__settings_json["billingInfo"]["cvv"]
+            cls.__settings_json["billingInfo"]["cvv"],
         )

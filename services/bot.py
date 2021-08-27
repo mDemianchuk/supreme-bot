@@ -1,6 +1,6 @@
+from models.billing_info import BillingInfo
 from services.webdriver import WebDriver
 from utils.logging_util import log_message
-from models.billing_info import BillingInfo
 
 
 class Bot:
@@ -26,23 +26,19 @@ class Bot:
         return self.webdriver.click_on_element(item)
 
     def select_color(self, item_color: str):
-        color_box_x_path = '//*[@id="styles"]/ul/li[{}]'.format(
-            item_color)
-        color_box = self.webdriver.find_element_by_x_path(
-            color_box_x_path)
+        color_box_x_path = '//*[@id="styles"]/ul/li[{}]'.format(item_color)
+        color_box = self.webdriver.find_element_by_x_path(color_box_x_path)
         return self.webdriver.click_on_element(color_box)
 
     def select_size(self, item_size: str):
         return self.webdriver.select_dropdown_option('//*[@id="size-options"]', item_size)
 
     def add_to_cart(self):
-        add_to_cart_button = self.webdriver.find_element_by_visible_text(
-            "add to cart")
+        add_to_cart_button = self.webdriver.find_element_by_visible_text("add to cart")
         return self.webdriver.click_on_element(add_to_cart_button)
 
     def go_to_checkout(self):
-        checkout_button = self.webdriver.find_element_by_visible_text(
-            "check out")
+        checkout_button = self.webdriver.find_element_by_visible_text("check out")
         return self.webdriver.click_on_element(checkout_button)
 
     def fill_in_checkout_form(self, billing_info: BillingInfo):
@@ -65,24 +61,20 @@ class Bot:
         self.webdriver.fill_in_input_field(
             '//*[@id="address_inputs_table"]/tbody/tr/td[1]/input', billing_info.zip_code
         )
-        self.webdriver.select_dropdown_option(
-            '//*[@id="order_billing_state"]', billing_info.state)
+        self.webdriver.select_dropdown_option('//*[@id="order_billing_state"]', billing_info.state)
         self.webdriver.fill_in_input_field(
             '//input[@placeholder="credit card number"]', billing_info.cc_number
         )
         self.webdriver.select_dropdown_option(
-            '//*[@id="credit_card_month"]', billing_info.exp_month)
-        self.webdriver.select_dropdown_option(
-            '//*[@id="credit_card_year"]', billing_info.exp_year)
-        self.webdriver.fill_in_input_field(
-            '//input[@placeholder="cvv"]', billing_info.cvv)
+            '//*[@id="credit_card_month"]', billing_info.exp_month
+        )
+        self.webdriver.select_dropdown_option('//*[@id="credit_card_year"]', billing_info.exp_year)
+        self.webdriver.fill_in_input_field('//input[@placeholder="cvv"]', billing_info.cvv)
 
     def agree_to_terms(self):
-        terms_checkbox = self.webdriver.find_element_by_x_path(
-            '//*[@id="order_terms"]')
+        terms_checkbox = self.webdriver.find_element_by_x_path('//*[@id="order_terms"]')
         return self.webdriver.click_on_element(terms_checkbox)
 
     def process_payment(self):
-        process_payment_button = self.webdriver.find_element_by_visible_text(
-            "process payment")
+        process_payment_button = self.webdriver.find_element_by_visible_text("process payment")
         return self.webdriver.click_on_element(process_payment_button)
