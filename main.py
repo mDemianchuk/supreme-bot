@@ -1,7 +1,7 @@
+import time
 import util
 import logging
 from bot import Bot
-import time
 
 
 def main():

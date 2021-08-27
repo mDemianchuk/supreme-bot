@@ -2,7 +2,7 @@ from webdriver import WebDriver
 
 
 class Bot:
-    def __init__(self, start_page_url):
+    def __init__(self, start_page_url: str):
         self.webdriver = WebDriver()
         self.start_page_url = start_page_url
 
@@ -18,18 +18,18 @@ class Bot:
     def is_on_start_page(self):
         return self.webdriver.get_current_url() == self.start_page_url
 
-    def select_item(self, item_name):
+    def select_item(self, item_name: str):
         item = self.webdriver.find_element_by_visible_text(item_name)
         return self.webdriver.click_on_element(item)
 
-    def select_color(self, item_color):
+    def select_color(self, item_color: str):
         color_box_x_path = '//*[@id="styles"]/ul/li[{}]'.format(
             item_color)
         color_box = self.webdriver.find_element_by_x_path(
             color_box_x_path)
         return self.webdriver.click_on_element(color_box)
 
-    def select_size(self, item_size):
+    def select_size(self, item_size: str):
         return self.webdriver.select_dropdown_option('//*[@id="size-options"]', item_size)
 
     def add_to_cart(self):
@@ -42,7 +42,7 @@ class Bot:
             "check out")
         return self.webdriver.click_on_element(checkout_button)
 
-    def fill_in_checkout_form(self, billing_info):
+    def fill_in_checkout_form(self, billing_info: dict):
         self.webdriver.fill_in_input_field(
             '//*[@id="billing-info"]/tbody/tr[1]/td/input', billing_info["fullName"]
         )
