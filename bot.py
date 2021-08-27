@@ -22,12 +22,12 @@ class Bot:
         item = self.webdriver.find_element_by_visible_text(item_name)
         return self.webdriver.click_on_element(item)
 
-    def select_colorway(self, item_colorway_position):
-        colorway_box_x_path = '//*[@id="styles"]/ul/li[{}]'.format(
-            item_colorway_position)
-        colorway_box = self.webdriver.find_element_by_x_path(
-            colorway_box_x_path)
-        return self.webdriver.click_on_element(colorway_box)
+    def select_color(self, item_color):
+        color_box_x_path = '//*[@id="styles"]/ul/li[{}]'.format(
+            item_color)
+        color_box = self.webdriver.find_element_by_x_path(
+            color_box_x_path)
+        return self.webdriver.click_on_element(color_box)
 
     def select_size(self, item_size):
         return self.webdriver.select_dropdown_option('//*[@id="size-options"]', item_size)

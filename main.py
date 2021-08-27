@@ -1,6 +1,7 @@
 import util
 import logging
 from bot import Bot
+import time
 
 
 def main():
@@ -10,12 +11,13 @@ def main():
     items = settings["items"]
     billing_info = settings["billingInfo"]
 
-    bot = Bot("https://www.supremenewyork.com/mobile#categories/new")
+    bot = Bot("https://www.supremenewyork.com/mobile#categories/Jackets")
     logging.info("Initialized a bot instance")
+    start_time = time.time()
     item_index = 0
     while item_index != len(items):
         item_name = items[item_index]["name"].strip()
-        item_colorway_position = items[item_index]["colorwayPosition"].strip()
+        item_color = items[item_index]["color"].strip()
         item_size = items[item_index]["size"].strip()
 
         bot.go_to_start_page()
@@ -24,9 +26,9 @@ def main():
                 bot.refresh()
         logging.info("Item {} selected".format(item_name))
 
-        if item_colorway_position and bot.select_colorway(item_colorway_position):
+        if item_color and bot.select_color(item_color):
             logging.info("Colorway at position {} selected".format(
-                item_colorway_position))
+                item_color))
 
         if item_size and bot.select_size(item_size):
             logging.info("Size {} selected".format(item_size))
@@ -44,6 +46,8 @@ def main():
 
     if bot.agree_to_terms():
         logging.info("Agreed to temrs")
+
+    logging.info(f"Total time: {time.time() - start_time}")
 
 
 # Uncomment this block of code to process the payment automatically

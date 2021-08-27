@@ -72,6 +72,8 @@ class WebDriver:
         try:
             for character in text:
                 input_field.send_keys(character)
+                # import time
+                # time.sleep(0.005)
             return True
         except:
             logging.warning(
