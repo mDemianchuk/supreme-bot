@@ -22,12 +22,12 @@ A free to use bot for supremenewyork.com that allows multiple-item checkout
 
     ```
     supreme-bot/
-    ├── bot.py
+    ├── run.py
     ├── ...
     ├── chromedriver (or chromedriver.exe for Windows users)
     ```
 
-4. Fill in the `settings.json`:
+4. Fill in `settings.json`:
 
     ```  
     {
