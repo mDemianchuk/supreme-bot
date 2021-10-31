@@ -1,5 +1,5 @@
-# supreme-bot
-A free to use bot for supremenewyork.com that allows multiple-item checkout
+## Description
+The __Supreme Bot__ is a solution to purchasing limited goods from Supreme New York. After a user provides the desired product(-s) details and supplies payment and shipping information, the bot runs automated scripts to add the product(-s) to the cart and complete the checkout process mocking user behavior.
 
 ## Requirements
 - Python 3
